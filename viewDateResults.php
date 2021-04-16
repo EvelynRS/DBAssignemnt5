@@ -41,7 +41,7 @@
     </div>';}
     else{
         echo'<form class="forms" id="date" method="post">
-        <label for="gdate">Team Name:</label>
+        <label for="gdate">Date:</label><br>
         <input type="date" name="date" id="gdate" > <br>
         <input type="submit" value="View results!" >
     </form>';
