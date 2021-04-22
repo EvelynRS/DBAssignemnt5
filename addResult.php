@@ -59,11 +59,11 @@ $conn->close();
 <br>
 <div class="content">
 <form action="addResult.php" method="post" class="forms">
-    Game ID:<input type="text" name="game_id"><br>
-    Home Team ID:<input type="text" name="home_team"><br>
-    Away Team ID:<input type="text" name="away_team"><br>
-    Home Team Score:<input type="text" name="home_score"><br>
-    Away Team Score:<input type="text" name="away_score"><br>    
+    Game ID:<input type="text" name="game_id" required><br>
+    Home Team ID:<input type="text" name="home_team" required><br>
+    Away Team ID:<input type="text" name="away_team" required><br>
+    Home Team Score:<input type="text" name="home_score" required><br>
+    Away Team Score:<input type="text" name="away_score" required><br>    
     <input name="submit" type="submit" value="Add my results!">
 </form>
 

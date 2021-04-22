@@ -21,7 +21,7 @@
 <div class="content">
 <form class="forms" id="date" method="post">
         <label for="gdate">Date:</label><br>
-        <input type="date" name="date" id="gdate" > <br>
+        <input type="date" name="date" id="gdate" required> <br>
         <input type="submit" value="View the results" >
 
 

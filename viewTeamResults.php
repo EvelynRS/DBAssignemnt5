@@ -20,7 +20,7 @@
 <br>
 <div class="content">
     <form action="viewTeamResults.php" method="post">
-        Team Name:<input type="text" name="team_name"><br>
+        Team Name:<input type="text" name="team_name" required><br>
         <input name="submit" type="submit" value="View the results">
     </form>
 

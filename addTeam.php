@@ -19,9 +19,9 @@
 <br>
 <div class="content">
     <form action="addTeam.php" method="post">
-        Team_Name:<input type="text" name="team_name"><br>
-        Nick_Name:<input type="text" name="nick_name"><br>
-        Rank:<input type="text" name="rank"><br>
+        Team_Name:<input type="text" name="team_name" required><br>
+        Nick_Name:<input type="text" name="nick_name" required><br>
+        Rank:<input type="text" name="rank" required><br>
 
         
         <input name="submit"type="submit" value="Add my team!">

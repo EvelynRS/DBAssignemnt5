@@ -19,14 +19,14 @@
 <br>
 <div class="content">
 <form action="addGame.php" method="post" class="forms">
-    Home Team Rank:<input type="text" name="rank1"><br>
+    Home Team Rank:<input type="text" name="rank1" required><br>
     
-    Away Team Rank:<input type="text" name="rank2"><br>
+    Away Team Rank:<input type="text" name="rank2" required><br>
     
-    Location:<input type="text" name="location"><br>
+    Location:<input type="text" name="location" required><br>
     
     Date:</label><br>  
-    <input type="date" name="date" id="dt">
+    <input type="date" name="date" id="dt" required>
     
     <input name="submit" type="submit" value="Add my game!">
 </form>
