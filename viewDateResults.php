@@ -1,17 +1,5 @@
 <html>
 
-<script>
-    function changeVisible() {
-        document.getElementById("date").style.visibility = "hidden";
-        document.getElementById("results").style.visibility = "visible";
-    }
-
-    function changeVisible2() {
-        document.getElementById("date").style.visibility = "visible";
-        document.getElementById("results").style.visibility = "hidden";
-    }
-</script>
-
 <head>
     <link rel="stylesheet" href="style.css">
     <title>Home Page</title>
@@ -47,10 +35,10 @@ if(array_key_exists('date', $_POST)){
     </form>
     </div>';}
 
-$servername = "localhost";
-$username = "mjk006";
-$password = "aiPh2tiu";
-$dbname = "mjk006";
+    $servername = "localhost";
+    $username = "ers007";
+    $password = "shei1Iex";
+    $dbname = "ers007";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -140,10 +128,10 @@ if ($conn->connect_error) {
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
-            echo "<table><tr><th>Team ID</th><th>Team Name</th><th>Team Nickname</th><th>Team Rank</th></tr>";
+            echo "<table><tr><th>Home Team</th><th>Home Nickname</th><th>Home Score</th><th>Away Team</th><th>Away Nickname</th><th>Away Score</th><th>Location</th></tr>";
             // output data of each row
             while($row = $result->fetch_assoc()) {
-                echo "<tr><td>" . $row["TEAM_ID"]. "</td><td>" . $row["TEAM_NAME"]. "</td><td> " . $row["NICKNAME"]. "</td><td> " . $row["RANK"]. "</td></tr>";
+                echo "<tr><td>" . $row["teamone"]. "</td><td>" . $row["nickone"]. "</td><td> " . $row["homescore"]. "</td><td> " . $row["teamtwo"]. "</td><td> " . $row["nicktwo"]. "</td><td> " . $row["awayscore"]. "</td><td> " . $row["location"]. "</td></tr>";
             }
             echo "</table>";
         } else {
