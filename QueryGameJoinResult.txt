@@ -1,0 +1,14 @@
+
+    SELECT
+        game.GAME_ID,
+        game.RANK1,
+        game.RANK2,
+        game.LOCATION,
+        game.DATE
+
+        FROM
+            game
+            LEFT JOIN
+            result
+            ON game.GAME_ID = result.GAME_ID
+            WHERE result.GAME_ID IS NULL AND game.GAME_ID = 3;

@@ -33,14 +33,14 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT TEAM_ID, TEAM_NAME, NICKNAME, RANK FROM team";
+$sql = "SELECT TEAM_ID, TEAM_NAME, NICKNAME, RANK FROM team ORDER BY RANK ASC";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
-    echo "<table><tr><th>Team ID</th><th>Team Name</th><th>Team Nickname</th><th>Team Rank</th></tr>";
+    echo "<table style=\"margin-left:auto; margin-right:auto; text-align:center; width:50%\"><tr><th>Team Rank</th><th>Team Name</th><th>Team Nickname</th><th>Team ID</th></tr>";
     // output data of each row
     while($row = $result->fetch_assoc()) {
-        echo "<tr><td>" . $row["TEAM_ID"]. "</td><td>" . $row["TEAM_NAME"]. "</td><td> " . $row["NICKNAME"]. "</td><td> " . $row["RANK"]. "</td></tr>";
+        echo "<tr><td> " . $row["RANK"]. "</td><td>" . $row["TEAM_NAME"]. "</td><td> " . $row["NICKNAME"]. "</td><td>" . $row["TEAM_ID"]. "</td></tr>";
     }
     echo "</table>";
 } else {

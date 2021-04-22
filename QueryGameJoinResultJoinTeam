@@ -1,0 +1,22 @@
+SELECT
+    team.TEAM_NAME
+
+    FROM
+
+        (SELECT
+            game.GAME_ID,
+            game.RANK1 AS r1,
+            game.LOCATION,
+            game.DATE
+
+            FROM
+                game
+                LEFT JOIN
+                result
+                ON game.GAME_ID = result.GAME_ID
+                WHERE result.GAME_ID IS NULL) AS A
+
+    INNER JOIN
+    team
+    ON A.r1=team.RANK
+    WHERE A.GAME_ID = '3';

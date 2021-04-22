@@ -19,8 +19,8 @@
 <br>
 <div class="content">
     <form action="addTeam.php" method="post">
-        Team_Name:<input type="text" name="team_name" required><br>
-        Nick_Name:<input type="text" name="nick_name" required><br>
+        Team Name:<input type="text" name="team_name" required><br>
+        Nickname:<input type="text" name="nick_name" required><br>
         Rank:<input type="text" name="rank" required><br>
 
         
@@ -57,15 +57,24 @@ if (isset($_POST['submit']))
     $nickname = "'" . (string)$nickname . "'";
     $rank = $_POST["rank"];
     $rank = "'" . (string)$rank . "'";
-    
-    $sql = "INSERT INTO team (TEAM_ID, TEAM_NAME, NICKNAME, RANK)
-    VALUES ($result, $name, $nickname, $rank)";
 
-    if ($conn->query($sql) === TRUE) {
-      echo "New record created successfully";
-    } else {
-      echo "Error: " . $sql . "<br>" . $conn->error;
+    $sql = "SELECT * FROM team WHERE RANK=$rank";
+    $result = $conn->query($sql);
+
+    if($result->num_rows > 0) {
+      echo"A team of that rank already exists. Please try again with a unique rank.";
     }
+    else {
+      $sql = "INSERT INTO team (TEAM_ID, TEAM_NAME, NICKNAME, RANK)
+      VALUES ($result, $name, $nickname, $rank)";
+
+      if ($conn->query($sql) === TRUE) {
+        echo "New record created successfully";
+      } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+      }
+    }
+
 
          
 }

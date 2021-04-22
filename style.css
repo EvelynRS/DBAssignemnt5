@@ -5,7 +5,7 @@
 
 .topnav a {
     float: left;
-    color: f2f2f2;
+    color: #f2f2f2;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
@@ -13,12 +13,12 @@
 }
 
 .topnav a:hover {
-    background-color: #ddd;
+    background-color: #c9d7e7;
     color: black;
 }
 
 .topnav a.active {
-    background-color: #ACAF50;
+    background-color: #507caf;
     color: white;
 }
 
@@ -45,7 +45,7 @@
 
 .content form input[type=submit] {
     width: 100%;
-    background-color: #4CAF50;
+    background-color: #397dca;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
@@ -55,5 +55,5 @@
 }
 
 .content form input[type=submit]:hover {
-    background-color: #45a049;
+    background-color: #2e64a1;
 }

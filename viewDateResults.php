@@ -119,10 +119,19 @@ if ($conn->connect_error) {
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
-            echo "<table><tr><th>Home Team</th><th>Home Nickname</th><th>Home Score</th><th>Away Team</th><th>Away Nickname</th><th>Away Score</th><th>Location</th></tr>";
+            echo "<table style=\"margin-left:auto; margin-right:auto; text-align:center; width:75%\"><tr><th>Home Team</th><th>Home Nickname</th><th>Home Score</th><th>Away Team</th><th>Away Nickname</th><th>Away Score</th><th>Location</th><th>Winner</th></tr>";
             // output data of each row
             while($row = $result->fetch_assoc()) {
-                echo "<tr><td>" . $row["teamone"]. "</td><td>" . $row["nickone"]. "</td><td> " . $row["homescore"]. "</td><td> " . $row["teamtwo"]. "</td><td> " . $row["nicktwo"]. "</td><td> " . $row["awayscore"]. "</td><td> " . $row["location"]. "</td></tr>";
+                echo "<tr><td>" . $row["teamone"]. "</td><td>" . $row["nickone"]. "</td><td> " . $row["homescore"]. "</td><td> " . $row["teamtwo"]. "</td><td> " . $row["nicktwo"]. "</td><td> " . $row["awayscore"]. "</td><td> " . $row["location"]. "</td>";
+                if ($row["homescore"] > $row["awayscore"]){
+                    echo"<td>". $row["teamone"]."</td></tr>";
+                }
+                elseif ($row["homescore"] < $row["awayscore"]){
+                    echo"<td>". $row["teamtwo"]."</td></tr>";
+                }
+                else {
+                    echo"<td>Tie</td></tr>";
+                }
             }
             echo "</table>";
         } else {
