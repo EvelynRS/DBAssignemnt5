@@ -56,21 +56,10 @@ if (isset($_POST['submit']))
       die("Connection failed: " . $conn->connect_error);
     }
     
-    //$sql2 = "SELECT COUNT(TEAM_ID) FROM team";
-    //$result = $conn->query($sql2);
-    //$result = $result + 1;
-    //echo $result;
-    //$result=mysql_query("SELECT COUNT(*) AS 'total' FROM team");
-    //$row = mysql_fetch_array($result);
-    //echo $row['total'];
-    //$data = $row['total'];
-    //$data = "'" . (string)$data . "'";
-    
+    //Generates random number for team id
     for ($i = 0; $i < 5; $i++){
         $data .= mt_rand(0,9);
     }
-    
-    //echo $data;
     
     $sql = "INSERT INTO team (TEAM_ID, TEAM_NAME, NICKNAME, RANK)
     VALUES ($data, $name, $nickname, $rank)";
