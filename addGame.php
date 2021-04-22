@@ -30,12 +30,27 @@
     
     <input name="submit" type="submit" value="Add my game!">
 </form>
-</div>
-
-</body>
-</html>
 
 <?php
+
+$servername = "localhost";
+$username = "ers007";
+$password = "shei1Iex";
+$dbname = "ers007";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+
+$query = "SELECT MAX(GAME_ID) FROM game";
+$result = $conn->query($query);
+
+$row = $result->fetch_assoc();
+$result = $row["MAX(GAME_ID)"] + 1;
+
 if (isset($_POST['submit'])) 
 {
     //echo "made it here";
@@ -52,26 +67,10 @@ if (isset($_POST['submit']))
     
     $date = $_POST["date"];
     $date = "'" . (string)$date . "'";
-    
-    $servername = "localhost";
-    $username = "ers007";
-    $password = "shei1Iex";
-    $dbname = "ers007";
 
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    // Check connection
-    if ($conn->connect_error) {
-      die("Connection failed: " . $conn->connect_error);
-    }
-    
-    //Generates random number for team id
-    for ($i = 0; $i < 5; $i++){
-        $data .= mt_rand(0,9);
-    }
     
     $sql = "INSERT INTO game (GAME_ID, RANK1, RANK2, LOCATION, DATE)
-    VALUES ($data, $homerank, $awayrank, $location, $date)";
+    VALUES ($result, $homerank, $awayrank, $location, $date)";
 
     if ($conn->query($sql) === TRUE) {
       echo "New record created successfully";
@@ -82,3 +81,8 @@ if (isset($_POST['submit']))
 }
 $conn->close(); 
 ?>
+
+</div>
+
+</body>
+</html>

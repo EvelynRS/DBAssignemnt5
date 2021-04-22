@@ -22,19 +22,10 @@
 <form class="forms" id="date" method="post">
         <label for="gdate">Date:</label><br>
         <input type="date" name="date" id="gdate" > <br>
-        <input type="submit" value="View results!" >
+        <input type="submit" value="View the results" >
 
 
 <?php
-
-if(array_key_exists('date', $_POST)){
-    echo'<div class="tables" id="results" onsubmit="changeVisible2()">
-    PLACEHOLDER
-    <form class="forms">
-        <input type="submit" value="Check another team?" >
-    </form>
-    </div>';}
-
     $servername = "localhost";
     $username = "ers007";
     $password = "shei1Iex";
@@ -52,7 +43,7 @@ if ($conn->connect_error) {
 
         $date = $_POST["date"];
         $date = "'" . (string)$date . "'";
-        
+
 
         $sql = "SELECT
 
@@ -122,7 +113,7 @@ if ($conn->connect_error) {
         team.TEAM_ID=result.TEAM_TWO_ID
     ) as B) as S 
     ON T.id1=S.id2
-    WHERE date = '2021-04-01'";
+    WHERE date = $date";
 
 
         $result = $conn->query($sql);

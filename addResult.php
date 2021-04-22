@@ -66,10 +66,6 @@ $conn->close();
     Away Team Score:<input type="text" name="away_score"><br>    
     <input name="submit" type="submit" value="Add my results!">
 </form>
-</div>
-
-</body>
-</html>
 
 <?php
 if (isset($_POST['submit'])) 
@@ -94,9 +90,9 @@ if (isset($_POST['submit']))
 
     
     $servername = "localhost";
-    $username = "mjk006";
-    $password = "aiPh2tiu";
-    $dbname = "mjk006";
+    $username = "ers007";
+    $password = "shei1Iex";
+    $dbname = "ers007";
 
     // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
@@ -104,17 +100,30 @@ if (isset($_POST['submit']))
     if ($conn->connect_error) {
       die("Connection failed: " . $conn->connect_error);
     }
-        
-    $sql = "INSERT INTO result (GAME_ID, TEAM_ONE_ID, TEAM_TWO_ID, SCORE_ONE, SCORE_TWO)
-    VALUES ($gameid, $homename, $awayname, $homescore, $awayscore)";
 
-    if ($conn->query($sql) === TRUE) {
-      echo "New record created successfully";
-    } else {
-      echo "Error: " . $sql . "<br>" . $conn->error;
+    $sql = "SELECT * FROM game WHERE GAME_ID=$gameid";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) { 
+        $sql = "INSERT INTO result (GAME_ID, TEAM_ONE_ID, TEAM_TWO_ID, SCORE_ONE, SCORE_TWO)
+        VALUES ($gameid, $homename, $awayname, $homescore, $awayscore)";
+
+        if ($conn->query($sql) === TRUE) {
+        echo "New record created successfully";
+        } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+    }
+    else {
+        echo "Game Id does not exist, please select a Game ID from the table above.";
     }
 
          
 }
 $conn->close(); 
 ?>
+
+</div>
+
+</body>
+</html>
+

@@ -26,24 +26,8 @@
         
         <input name="submit"type="submit" value="Add my team!">
     </form>
-</div>
 
-</body>
-</html>
-
-<?php
-if (isset($_POST['submit'])) 
-{
-    // replace ' ' with '\ ' in the strings so they are treated as single command line args
-    //variables are immediately setup to be in the proper format for sql insertion
-    $name = $_POST["team_name"];
-    $name = "'" . (string)$name . "'";
-    $nickname = $_POST["nick_name"];
-    $nickname = "'" . (string)$nickname . "'";
-    $rank = $_POST["rank"];
-    $rank = "'" . (string)$rank . "'";
-
-    
+    <?php
     $servername = "localhost";
     $username = "ers007";
     $password = "shei1Iex";
@@ -55,14 +39,27 @@ if (isset($_POST['submit']))
     if ($conn->connect_error) {
       die("Connection failed: " . $conn->connect_error);
     }
-    
-    //Generates random number for team id
-    for ($i = 0; $i < 5; $i++){
-        $data .= mt_rand(0,9);
-    }
+
+    $query = "SELECT MAX(TEAM_ID) FROM team";
+    $result = $conn->query($query);
+
+    $row = $result->fetch_assoc();
+    $result = $row["MAX(TEAM_ID)"] + 1;
+
+
+if (isset($_POST['submit'])) 
+{
+    // replace ' ' with '\ ' in the strings so they are treated as single command line args
+    //variables are immediately setup to be in the proper format for sql insertion
+    $name = $_POST["team_name"];
+    $name = "'" . (string)$name . "'";
+    $nickname = $_POST["nick_name"];
+    $nickname = "'" . (string)$nickname . "'";
+    $rank = $_POST["rank"];
+    $rank = "'" . (string)$rank . "'";
     
     $sql = "INSERT INTO team (TEAM_ID, TEAM_NAME, NICKNAME, RANK)
-    VALUES ($data, $name, $nickname, $rank)";
+    VALUES ($result, $name, $nickname, $rank)";
 
     if ($conn->query($sql) === TRUE) {
       echo "New record created successfully";
@@ -74,5 +71,10 @@ if (isset($_POST['submit']))
 }
 $conn->close(); 
 ?>
+
+</div>
+
+</body>
+</html>
 
 

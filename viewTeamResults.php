@@ -21,12 +21,12 @@
 <div class="content">
     <form action="viewTeamResults.php" method="post">
         Team Name:<input type="text" name="team_name"><br>
-        <input name="submit" type="submit" value="Add my team!">
+        <input name="submit" type="submit" value="View the results">
     </form>
 
     <?php
 
-if(array_key_exists('team_name', $_POST)){
+
     
 $servername = "localhost";
 $username = "ers007";
@@ -39,6 +39,11 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+if(array_key_exists('team_name', $_POST)){
+
+    $tname = $_POST["team_name"];
+    $tname = "'" . (string)$tname . "'";
+
 
         $sql = "SELECT
 
@@ -105,7 +110,7 @@ if ($conn->connect_error) {
         team.TEAM_ID=result.TEAM_TWO_ID
     ) as B) as S 
     ON T.id1=S.id2
-    WHERE teamone = 'Ugly Dinosaurs' OR teamtwo = 'Ugly Dinosaurs';";
+    WHERE teamone = $tname OR teamtwo = $tname";
 
 
         $result = $conn->query($sql);
