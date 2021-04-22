@@ -18,25 +18,32 @@
 <p style="text-align:center">Here you can add a team to the database! To do so, just fill out the form below.</p>
 <br>
 <div class="content">
-    <form class="forms">
-        <label for="tname">Team Name:</label>
-        <input type="text" name="name" id="tname" value="<?php echo $name;?>"> <br>
-        <label for="nname">Nickname:</label>
-        <input type="text" name="nickname" id="nname" value="<?php echo $nickname;?>"> <br>
-        <label for="trank">Rank:</label>
-        <input type="text" name="rank" id="trank" value="<?php echo $rank;?>"> <br>
-        <input type="submit" value="Add my team!">
-    </form>
+    <form action="addTeam.php" method="post">
+        Team_Name:<input type="text" name="team_name"><br>
+        Nick_Name:<input type="text" name="nick_name"><br>
+        Rank:<input type="text" name="rank"><br>
 
+        
+        <input name="submit"type="submit" value="Add my team!">
+    </form>
+</div>
+
+</body>
+</html>
 
 <?php
 if (isset($_POST['submit'])) 
 {
     // replace ' ' with '\ ' in the strings so they are treated as single command line args
-    $tname = escapeshellarg($_POST[tname]);
-    $nname = escapeshellarg($_POST[nname]);
-    $trank = escapeshellarg($_POST[trank]);
+    //variables are immediately setup to be in the proper format for sql insertion
+    $name = $_POST["team_name"];
+    $name = "'" . (string)$name . "'";
+    $nickname = $_POST["nick_name"];
+    $nickname = "'" . (string)$nickname . "'";
+    $rank = $_POST["rank"];
+    $rank = "'" . (string)$rank . "'";
 
+    
     $servername = "localhost";
     $username = "mjk006";
     $password = "aiPh2tiu";
@@ -49,15 +56,24 @@ if (isset($_POST['submit']))
       die("Connection failed: " . $conn->connect_error);
     }
     
-    $sql2 = "SELECT COUNT(TEAM_ID) FROM team";
-    $result = $conn->query($sql2);
-    $result = $result + 1;
+    //$sql2 = "SELECT COUNT(TEAM_ID) FROM team";
+    //$result = $conn->query($sql2);
+    //$result = $result + 1;
+    //echo $result;
+    //$result=mysql_query("SELECT COUNT(*) AS 'total' FROM team");
+    //$row = mysql_fetch_array($result);
+    //echo $row['total'];
+    //$data = $row['total'];
+    //$data = "'" . (string)$data . "'";
     
-    //$data = mysql_fetch_assoc($result);
-    //$data = $data + 1;
+    for ($i = 0; $i < 5; $i++){
+        $data .= mt_rand(0,9);
+    }
+    
+    //echo $data;
     
     $sql = "INSERT INTO team (TEAM_ID, TEAM_NAME, NICKNAME, RANK)
-    VALUES ($result, $tname, $nname, $trank)";
+    VALUES ($data, $name, $nickname, $rank)";
 
     if ($conn->query($sql) === TRUE) {
       echo "New record created successfully";
@@ -70,7 +86,4 @@ if (isset($_POST['submit']))
 $conn->close(); 
 ?>
 
-</div>
 
-</body>
-</html>
