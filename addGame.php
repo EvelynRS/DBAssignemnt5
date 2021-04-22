@@ -68,7 +68,19 @@ if (isset($_POST['submit']))
     $date = $_POST["date"];
     $date = "'" . (string)$date . "'";
 
-    
+    $sql = "SELECT * FROM team WHERE RANK = $homerank";
+    $result1 = $conn->query($sql);
+
+    $sql = "SELECT * FROM team WHERE RANK = $awayrank";
+    $result2 = $conn->query($sql);
+
+    if($result1->num_rows == 0){
+      echo "Rank 1 does not exist with a team. Please enter an existing team rank.";
+    }
+    elseif($result2->num_rows == 0){
+      echo "Rank 2 does not exist with a team. Please enter an existing team rank.";
+    }
+    else {
     $sql = "INSERT INTO game (GAME_ID, RANK1, RANK2, LOCATION, DATE)
     VALUES ($result, $homerank, $awayrank, $location, $date)";
 
@@ -77,6 +89,7 @@ if (isset($_POST['submit']))
     } else {
       echo "Error: " . $sql . "<br>" . $conn->error;
     }
+  }
 
 }
 $conn->close(); 

@@ -167,7 +167,6 @@ if (isset($_POST['submit']))
         echo "Game Id is invalid. The game either already has a result or does not exist. Please select a Game ID from the table above.";
     }
     else { 
-        echo "INSERTING";
         $sql = "INSERT INTO result (GAME_ID, TEAM_ONE_ID, TEAM_TWO_ID, SCORE_ONE, SCORE_TWO)
         VALUES ($gameid, $homename, $awayname, $homescore, $awayscore)";
 
