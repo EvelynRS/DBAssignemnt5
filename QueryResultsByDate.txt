@@ -1,0 +1,69 @@
+SELECT
+
+	T.teamone,
+	T.nickone,
+	T.homescore,
+	S.teamtwo,
+	S.nicktwo,
+	S.awayscore,
+    T.date,
+    T.location
+
+FROM (
+	
+
+SELECT 
+	teamone,
+	nickone,
+	homescore,
+	id1,
+	date,
+    location
+	
+	FROM (
+	
+	SELECT
+	team.TEAM_NAME AS teamone,
+	team.NICKNAME AS nickone,
+	result.SCORE_ONE as homescore,
+	result.GAME_ID as id1,
+	game.DATE as date,
+    game.LOCATION as location	
+	
+	FROM 
+	team
+	INNER JOIN
+	result
+	ON 
+	team.TEAM_ID=result.TEAM_ONE_ID
+	INNER JOIN
+	game
+	ON
+	result.GAME_ID=game.GAME_ID
+    ) as A
+	) as T
+
+INNER JOIN
+
+(SELECT  teamtwo,
+	nicktwo,
+	awayscore,
+	id2
+
+	FROM
+
+	(SELECT
+	team.TEAM_NAME AS teamtwo,
+	team.NICKNAME AS nicktwo,
+	result.SCORE_TWO as awayscore,
+	result.GAME_ID as id2
+
+	FROM 
+	team
+	INNER JOIN
+	result
+	ON 
+	team.TEAM_ID=result.TEAM_TWO_ID
+) as B) as S 
+ON T.id1=S.id2
+WHERE date = '2021-04-01';
