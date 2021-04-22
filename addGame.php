@@ -18,16 +18,17 @@
 <p style="text-align:center">Here you can add a game to the database! To do so, just fill out the form below.</p>
 <br>
 <div class="content">
-<form class="forms">
-    <label for="htr">Home team rank:</label>
-    <input type="text" name="rank1" id="htr" value="<?php echo $rank1;?>"> <br>
-    <label for="atr">Away team rank:</label>
-    <input type="text" name="rank2" id="atr" value="<?php echo $rank2;?>"> <br>
-    <label for="loc">Location:</label>
-    <input type="text" name="location" id="loc" value="<?php echo $location;?>"> <br>
-    <label for="dt">Date:</label><br>
-    <input type="date" name="date" id="dt" value="<?php echo $date;?>">
-    <input type="submit" value="Add my game!">
+<form action="addGame.php" method="post" class="forms">
+    Home Team Rank:<input type="text" name="rank1"><br>
+    
+    Away Team Rank:<input type="text" name="rank2"><br>
+    
+    Location:<input type="text" name="location"><br>
+    
+    Date:</label><br>  
+    <input type="date" name="date" id="dt">
+    
+    <input name="submit" type="submit" value="Add my game!">
 </form>
 </div>
 
@@ -35,4 +36,49 @@
 </html>
 
 <?php
+if (isset($_POST['submit'])) 
+{
+    //echo "made it here";
+    // replace ' ' with '\ ' in the strings so they are treated as single command line args
+    //variables are immediately setup to be in the proper format for sql insertion
+    $homerank = $_POST["rank1"];
+    $homerank = "'" . (string)$homerank . "'";
+    
+    $awayrank = $_POST["rank2"];
+    $awayrank = "'" . (string)$awayrank . "'";
+    
+    $location = $_POST["location"];
+    $location = "'" . (string)$location . "'";
+    
+    $date = $_POST["date"];
+    $date = "'" . (string)$date . "'";
+    
+    $servername = "localhost";
+    $username = "mjk006";
+    $password = "aiPh2tiu";
+    $dbname = "mjk006";
+
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Check connection
+    if ($conn->connect_error) {
+      die("Connection failed: " . $conn->connect_error);
+    }
+    
+    //Generates random number for team id
+    for ($i = 0; $i < 5; $i++){
+        $data .= mt_rand(0,9);
+    }
+    
+    $sql = "INSERT INTO game (GAME_ID, RANK1, RANK2, LOCATION, DATE)
+    VALUES ($data, $homerank, $awayrank, $location, $date)";
+
+    if ($conn->query($sql) === TRUE) {
+      echo "New record created successfully";
+    } else {
+      echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+}
+$conn->close(); 
 ?>
